@@ -1,0 +1,70 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-view1">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+    </style>
+	
+		
+
+    <div class="card">
+      <h1>View One</h1>
+     <button on-click="changeParam">Change Param</button>
+	 <button on-click="changeRoute">Change Route</button>
+   </div>
+  </template>
+
+  <script>
+    class MyView1 extends MyApp { //extending MyApp in order to use its 'central' property
+      static get is() { return 'my-view1'; }
+	  
+	  static get properties(){
+	  
+		return {
+		
+			param: {  // defining param value in m-view1 element, which will be shared through data binding among sibling elements
+				type: String,
+				value: "Mirza",
+				notify: true
+			},
+			
+		}
+	  }
+	  
+	  
+	  
+	  changeParam(){ //change param value in this element and check its value in my-view2
+		this.param = "Mirzoni";
+		console.log("Param in view1: " + this.param);
+		console.log("Central in view1: " + this.central);	
+		
+		console.log("Route data: " + this.route.subroute);
+	  }
+	  
+	  changeRoute(){//change route and give it parameters
+		location.href="/view2/mirza/200421991";
+	  }
+
+	  
+    }
+
+    window.customElements.define(MyView1.is, MyView1);
+  </script>
+</dom-module>
